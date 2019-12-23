@@ -29,4 +29,4 @@ jobs:
         prerelease: true
         title: "Development Build"
         files: |
-          ha-taskbar\dist\hataskbar.exe
+          D:\a\ha-taskbar\ha-taskbar\dist\hataskbar.exe
