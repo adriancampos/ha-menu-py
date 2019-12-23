@@ -1,15 +1,21 @@
 import yaml
+import os
+import sys
 from entities import Entity, DeviceType
 
 ACCESS_TOKEN = None
 SERVER_URL = None
 
-TRAY_ICON_PATH = "tray.ico"
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
+TRAY_ICON_PATH = resource_path("assets/tray.ico")
 
 # Load config from yaml
 try:
-    with open(r'configuration.yaml') as file:
+    with open(r'hataskbar.yaml') as file:
         config = yaml.safe_load(file)
 
         SERVER_URL = config['desktop']['server_url']
@@ -21,8 +27,8 @@ try:
         entities = [Entity(entity['entity_id'], DeviceType.get_from_string(
             entity['device_type']), entity['name']) for entity in config['entities']]
 except FileNotFoundError:
-    print("configuration.yaml not found; creating one...")
-    with open(r'configuration.yaml', 'w') as file:
+    print("hataskbar.yaml not found; creating one...")
+    with open(r'hataskbar.yaml', 'w') as file:
         file.writelines([
             'desktop:\n',
             '    server_url: \n',
