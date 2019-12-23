@@ -1,0 +1,11 @@
+configuration.yaml
+
+env/
+
+.vscode/
+
+__pycache__/
+
+build/
+
+dist/
